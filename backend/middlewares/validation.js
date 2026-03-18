@@ -25,7 +25,7 @@ const validateCardBody = Joi.object().keys({
   });
 
 const validateCardId = Joi.object().keys({
-    cardId: Joi.string.required().hex().length(24)
+    cardId: Joi.string().required().hex().length(24)
 });
 
 module.exports = {
