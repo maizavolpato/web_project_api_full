@@ -5,7 +5,7 @@ const {
   updateProfile,
   updateAvatar,
 } = require("../controllers/users");
-const auth = require("../../middlewares/auth");
+const auth = require("../../backend/middlewares/auth");
 const { validateUserBody, validateUserAvatar } = require("../middlewares/validation");
 
 const usersRouter = Router();
