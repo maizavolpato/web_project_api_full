@@ -1,7 +1,7 @@
 const winston = require('winston');
 
 //logger para requisições
-const requestLogger = espressWinston.logger({
+const requestLogger = expressWinston.logger({
     transports: [
         new winston.transports.File({ filename: 'request.log' })
     ],
