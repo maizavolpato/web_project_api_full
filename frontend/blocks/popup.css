@@ -1,0 +1,230 @@
+.popup {
+  width: 100vw;
+  height: 100vh;
+  background-color: rgba(0, 0, 0, 0.5);
+  position: fixed;
+  top: 0;
+  left: 0;
+  bottom: 0;
+  right: 0;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.popup__container {
+  max-width: 420px;
+  height: 330px;
+  background-color: #ffffff;
+  box-shadow: 0px 0px 25px 0px #00000026;
+  border-radius: 10px;
+  position: relative;
+}
+
+.popup__container-avatar {
+  width: 430px;
+  height: 272px;
+  background-color: #ffffff;
+  box-shadow: 0px 0px 25px 0px #00000026;
+  border-radius: 10px;
+  position: relative;
+}
+
+.popup__container-confirmation {
+  width: 430px;
+  height: 181px;
+  background-color: #ffffff;
+  box-shadow: 0px 0px 25px 0px #00000026;
+  border-radius: 10px;
+  position: relative;
+}
+
+.popup__title {
+  font-family: Inter;
+  color: #000000;
+  font-weight: 900;
+  font-size: 24px;
+  line-height: 100%;
+  margin: 34px 36px 54px 36px;
+}
+
+.popup__title-confirmation {
+  font-family: Inter;
+  font-weight: 900;
+  font-size: 24px;
+  line-height: 100%;
+  margin: 34px 0 38px 36px;
+}
+
+.popup__title-avatar {
+  font-family: Inter;
+  font-weight: 900;
+  font-size: 24px;
+  line-height: 100%;
+  margin: 0;
+  padding: 34px 64px 54px 36px;
+}
+
+.popup__profile-input,
+.popup__elements-input,
+.popup__avatar-input {
+  max-width: 358px;
+  width: 100%;
+  font-family: Inter;
+  font-weight: 400;
+  font-size: 14px;
+  line-height: 100%;
+  color: #000000;
+  padding: 0 0 13px 0;
+  border: none;
+  border-bottom: 1px solid rgb(0, 0, 0, 0.2);
+  margin: 0 36px 29px;
+  position: relative;
+}
+
+.popup__profile-input::placeholder {
+  font-family: Inter;
+  font-weight: 400;
+  font-size: 14px;
+  line-height: 100%;
+  color: #000000;
+}
+
+.popup__button-submit {
+  width: 358px;
+  height: 50px;
+  border: none;
+  border-radius: 2px;
+  margin: 19px 36px 36px;
+  background: #000000;
+  font-family: Inter;
+  font-weight: 400;
+  font-size: 18px;
+  line-height: 100%;
+  color: #ffffff;
+  text-align: center;
+  cursor: pointer;
+  position: relative;
+}
+
+.popup__button-confirm {
+  width: 358px;
+  height: 50px;
+  border: none;
+  border-radius: 2px;
+  margin: 0 36px 38px;
+  background: #000000;
+  font-family: Inter;
+  font-weight: 400;
+  font-size: 18px;
+  line-height: 100%;
+  color: #ffffff;
+  text-align: center;
+  cursor: pointer;
+  position: relative;
+}
+
+.popup__button-close {
+  width: 40px;
+  height: 40px;
+  background: transparent url("../images/close_button.png") center no-repeat;
+  border: none;
+  position: absolute;
+  top: -33px;
+  right: -36px;
+  padding: 0;
+  margin: 0;
+  cursor: pointer;
+}
+
+.popup__button-close:hover,
+.popup__button:hover {
+  opacity: 0.8;
+}
+
+.popup__fieldset {
+  padding: 0;
+  border: none;
+}
+
+.form-popup__elements-input::placeholder {
+  font-family: Inter;
+  font-weight: 400;
+  font-size: 14px;
+  line-height: 100%;
+}
+
+.popup_open {
+  display: flex;
+}
+
+.popup__input_type_error {
+  border-bottom: 1px solid #ff0000;
+}
+
+.popup__input-error-message {
+  display: none;
+}
+
+.popup__error_visible {
+  display: block;
+  width: 358px;
+  color: #ff0000;
+  font-family: Inter;
+  font-weight: 400;
+  font-size: 12px;
+  line-height: 100%;
+}
+#name-error {
+  position: absolute;
+  top: 145px;
+  right: 34px;
+}
+
+#detail-error {
+  position: absolute;
+  bottom: 100px;
+  right: 34px;
+}
+
+#title-error {
+  position: absolute;
+  top: 146px;
+  right: 34px;
+}
+
+#image-error {
+  position: absolute;
+  bottom: 110px;
+  right: 34px;
+}
+
+.popup__button_disabled {
+  background-color: #ffffff;
+  color: rgb(199, 199, 199);
+  border: solid 1px rgb(199, 199, 199);
+  cursor: auto;
+}
+
+@media screen and (max-width: 544px) {
+  .popup__profile-edit {
+    width: 282px;
+    height: 322px;
+  }
+
+  .popup__title {
+    font-size: 18px;
+  }
+
+  .popup__profile-input {
+    width: 238px;
+    margin: 0 22px 30px;
+  }
+
+  .popup__button-submit {
+    width: 238px;
+    height: 50px;
+    font-size: 14px;
+    margin: 17px 22px 25px 22px;
+  }
+}

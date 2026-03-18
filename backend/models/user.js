@@ -1,0 +1,41 @@
+const mongoose = require('mongoose');
+const validator = require('validator')
+
+const userSchema = new mongoose.Schema({
+    name: {
+        type: String,
+        default: 'Jacques Cousteau',
+        minlenght: 2,
+        maxlenght: 30,
+    },
+    about: {
+        type: String,
+        default: 'Explorer',
+        minlenghth: 2, 
+        maxlenght: 30,
+    },
+    avatar: {
+        type: String,
+        default: 'https://practicum-content.s3.us-west-1.amazonaws.com/resources/moved_avatar_1604080799.jpg',
+        validate: {
+            validator: (v) => validator.isURL(v),
+            message: 'URL inválida'
+        }
+    },
+    email: {
+        type: String,
+        required: true,
+        unique: true,
+        validate: {
+            validator: (v) => validator.isEmail(v),
+            message: 'Email inválido'
+        }
+    },
+    password: {
+        type: String,
+        required: true,
+        select: false
+    }
+})
+
+module.exports = mongoose.model('user', userSchema)
