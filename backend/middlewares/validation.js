@@ -16,7 +16,7 @@ const validateUserBody = Joi.object().keys({
     avatar: Joi.string().custom(validateURL)
 });
 const validateUserAvatar = Joi.object().keys({
-    avatar: Joi.string().required.custom(validateURL)
+    avatar: Joi.string().required().custom(validateURL)
 });
 
 const validateCardBody = Joi.object().keys({
