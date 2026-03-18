@@ -6,7 +6,7 @@ const {
   likeCard,
   dislikeCard,
 } = require("../controllers/cards");
-const auth = require("../../middlewares/auth");
+const auth = require("../../backend/middlewares/auth");
 const { validateCardBody, validateCardId } = require("../middlewares/validation");
 const { celebrate } = require("celebrate");
 
