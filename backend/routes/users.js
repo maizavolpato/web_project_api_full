@@ -1,5 +1,5 @@
 const { Router } = require("express");
-const celebrate = require('celebrate');
+const { celebrate } = require('celebrate');
 const {
   getCurrentUser,
   updateProfile,
