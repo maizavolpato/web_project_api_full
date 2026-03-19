@@ -5,6 +5,7 @@ const { cardsRouter } = require("./routes/cards");
 const  AppError = require("./errors/AppError");
 const { login, createUser } = require("./controllers/users");
 const auth = require("../backend/middlewares/auth");
+const { celebrate } = require('celebrate');
 const errorHandler = require('../backend/middlewares/errorHandler')
 const { errors } = require('celebrate');
 const { validateUserBody } = require("./middlewares/validation");

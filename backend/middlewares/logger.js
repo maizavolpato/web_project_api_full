@@ -1,4 +1,5 @@
 const winston = require('winston');
+const expressWinston = require('express-winston');
 
 //logger para requisições
 const requestLogger = expressWinston.logger({
