@@ -10,7 +10,7 @@ const errorHandler = require('../backend/middlewares/errorHandler')
 const { errors } = require('celebrate');
 const { validateUserBody } = require("./middlewares/validation");
 const { requestLogger, errorLogger } = require("./middlewares/logger");
-
+const cors = require('cors');
 
 const app = express();
 
@@ -27,6 +27,15 @@ main()
 app.use(express.json());
 
 app.use(requestLogger);
+
+app.use(cors());
+app.options('*', cors());
+
+app.get('/crash-test', () => {
+  setTimeout(() => {
+    throw new Error('O servidor travará agora');
+  }, 0);
+});
 
 app.post('/signin', login);
 app.post('/signup', celebrate({
