@@ -11,6 +11,7 @@
   },
   "dependencies": {
     "celebrate": "^15.0.3",
+    "cors": "^2.8.6",
     "express": "^5.2.1",
     "express-winston": "^4.2.0",
     "mongoose": "^9.3.0",

@@ -1,5 +1,5 @@
 // Especifique a BASE_URL da API.
-export const BASE_URL = "https://se-register-api.en.tripleten-services.com/v1"
+export const BASE_URL = "https://fotolog.crabdance.com/api"
 //funcao verifica a resposta
 const checkResponse = (res) => {
     if (res.ok) {

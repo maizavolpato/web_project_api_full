@@ -19,21 +19,21 @@ class Api {
     return Promise.all([this.getUserInfo(), this.getInitialCards()]);
   }
 
-  //GET https://around-api.pt-br.tripleten-services.com/v1/cards/
+  
   getInitialCards() {
     return this._makeRequest(`${this._baseUrl}/cards`, {
       headers: this._headers,
     });
   }
 
-  //GET https://around-api.pt-br.tripleten-services.com/v1/users/me
+ 
   getUserInfo() {
     return this._makeRequest(`${this._baseUrl}/users/me`, {
       headers: this._headers,
     });
   }
 
-  //PATCH https://around-api.pt-br.tripleten-services.com/v1/users/me
+  
   updateUserInfo({ name, about }) {
     return fetch(`${this._baseUrl}/users/me`, {
       method: "PATCH",
@@ -45,7 +45,7 @@ class Api {
     }).then((res) => this._handleServerResponse(res));
   }
 
-  //POST https://around-api.pt-br.tripleten-services.com/v1/cards/
+  
   updateCardInfo({ name, link }) {
     return fetch(`${this._baseUrl}/cards`, {
       method: "POST",
@@ -57,7 +57,7 @@ class Api {
     }).then((res) => this._handleServerResponse(res));
   }
 
-  //DELETE https://around-api.pt-br.tripleten-services.com/v1/cards/:cardId
+  
   deleteCard(cardId) {
     return fetch(`${this._baseUrl}/cards/${cardId}`, {
       method: "DELETE",
@@ -65,7 +65,7 @@ class Api {
     }).then((res) => this._handleServerResponse(res));
   }
 
-  //PUT https://around-api.pt-br.tripleten-services.com/v1/cards/:cardId/likes
+  
   likeCardOn(cardId) {
     return fetch(`${this._baseUrl}/cards/${cardId}/likes`, {
       method: "PUT",
@@ -73,14 +73,14 @@ class Api {
     }).then((res) => this._handleServerResponse(res));
   }
 
-  //PUT https://around-api.pt-br.tripleten-services.com/v1/cards/:cardId/likes
+  
   likeCardOff(cardId) {
     return fetch(`${this._baseUrl}/cards/${cardId}/likes`, {
       method: "DELETE",
       headers: this._headers,
     }).then((res) => this._handleServerResponse(res));
   }
-  //PATCH https://around-api.pt-br.tripleten-services.com/v1/users/me/avatar
+  
   updateProfilePhoto(avatar) {
     return fetch(`${this._baseUrl}/users/me/avatar`, {
       method: "PATCH",

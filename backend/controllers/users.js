@@ -80,11 +80,11 @@ async function createUser(req, res, next) {
       password: hash
     }))
     .then(user => res.status(201).send({
-      _id: users._id,
-      name: users.name,
-      about: users.about,
-      avatar: users.avatar,
-      email: users.email
+      _id: user._id,
+      name: user.name,
+      about: user.about,
+      avatar: user.avatar,
+      email: user.email
     }))
     .catch (next)
   }
