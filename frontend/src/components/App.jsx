@@ -5,6 +5,7 @@ import Footer from "./footer/Footer";
 import ImagePopup from "./main/components/imagePopup/ImagePopup";
 import { api } from "../utils/api";
 import CurrentUserContext from "../contexts/CurrentUserContext";
+import { BrowserRouter, Routes, Route, Navigate } from 'react-router-dom';
 
 function App() {
   const [currentUser, setCurrentUser] = useState({});
@@ -130,15 +131,21 @@ function App() {
     >
       <div className="page">
         <Header />
-        <Main
-          onOpenPopup={handleOpenPopup}
-          onClosePopup={handleClosePopup}
-          popup={popup}
-          cards={cards}
-          onCardLike={handleCardLike}
-          onDeleteCard={handleCardDelete}
-          onImageClick={handleImageClick}
-        />
+        <Routes>
+          <Route path="/signup" element={<Register />} />
+          <Route path="/signin" element={<Login />} />
+          <Route path="/" element={
+            <Main
+              onOpenPopup={handleOpenPopup}
+              onClosePopup={handleClosePopup}
+              popup={popup}
+              cards={cards}
+              onCardLike={handleCardLike}
+              onDeleteCard={handleCardDelete}
+              onImageClick={handleImageClick}
+            />
+          } />
+        </Routes>
         <Footer />
       </div>
     </CurrentUserContext.Provider>
