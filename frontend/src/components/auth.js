@@ -14,7 +14,6 @@ const checkResponse = (res) => {
 // A função register aceita os dados necessários como argumentos
 // e envia uma solicitação POST ao endpoint especificado.
 export const register = (email, password) => {
-  console.log('Dados sendo enviados:', { email, password });
   return fetch(`${BASE_URL}/signup`, {
     method: "POST",
     headers: {

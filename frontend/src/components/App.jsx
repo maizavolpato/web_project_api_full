@@ -5,7 +5,9 @@ import Footer from "./footer/Footer";
 import ImagePopup from "./main/components/imagePopup/ImagePopup";
 import { api } from "../utils/api";
 import CurrentUserContext from "../contexts/CurrentUserContext";
-import { BrowserRouter, Routes, Route, Navigate } from 'react-router-dom';
+import { BrowserRouter, Routes, Route, Navigate, HashRouter } from 'react-router-dom';
+import Login from "../components/main/components/login/Login";
+import Register from "../components/main/components/register/Register"
 
 function App() {
   const [currentUser, setCurrentUser] = useState({});
@@ -129,25 +131,27 @@ function App() {
         handleAddPlaceSubmit,
       }}
     >
-      <div className="page">
-        <Header />
-        <Routes>
-          <Route path="/signup" element={<Register />} />
-          <Route path="/signin" element={<Login />} />
-          <Route path="/" element={
-            <Main
-              onOpenPopup={handleOpenPopup}
-              onClosePopup={handleClosePopup}
-              popup={popup}
-              cards={cards}
-              onCardLike={handleCardLike}
-              onDeleteCard={handleCardDelete}
-              onImageClick={handleImageClick}
-            />
-          } />
-        </Routes>
-        <Footer />
-      </div>
+      <HashRouter>
+        <div className="page">
+          <Header />
+          <Routes>
+            <Route path="/signup" element={<Register />} />
+            <Route path="/signin" element={<Login />} />
+            <Route path="/" element={
+              <Main
+                onOpenPopup={handleOpenPopup}
+                onClosePopup={handleClosePopup}
+                popup={popup}
+                cards={cards}
+                onCardLike={handleCardLike}
+                onDeleteCard={handleCardDelete}
+                onImageClick={handleImageClick}
+              />
+            } />
+          </Routes>
+          <Footer />
+        </div>
+      </HashRouter>
     </CurrentUserContext.Provider>
   );
 }
