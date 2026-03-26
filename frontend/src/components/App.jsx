@@ -5,7 +5,7 @@ import Footer from "./footer/Footer";
 import ImagePopup from "./main/components/imagePopup/ImagePopup";
 import { api } from "../utils/api";
 import CurrentUserContext from "../contexts/CurrentUserContext";
-import { BrowserRouter, Routes, Route, Navigate, HashRouter } from 'react-router-dom';
+import { Routes, Route, HashRouter } from 'react-router-dom';
 import Login from "../components/main/components/login/Login";
 import Register from "../components/main/components/register/Register"
 

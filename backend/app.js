@@ -11,6 +11,7 @@ const { errors } = require('celebrate');
 const { validateUserBody } = require("./middlewares/validation");
 const { requestLogger, errorLogger } = require("./middlewares/logger");
 const cors = require('cors');
+const path = require ("path");
 
 const app = express();
 
@@ -26,6 +27,7 @@ main()
 
 app.use(express.json());
 
+
 app.use(requestLogger);
 
 app.use(cors({
@@ -38,6 +40,8 @@ app.use(cors({
   allowedHeaders: ['Content-Type', 'Authorization'],
   credentials: true
 }));
+
+app.use(express.static(path.join(__dirname, "../frontend/dist")));
 
 app.get('/crash-test', () => {
   setTimeout(() => {
@@ -54,6 +58,10 @@ app.use(auth);
 
 app.use("/api/users", usersRouter);
 app.use("/api/cards", cardsRouter);
+
+app.get("*", (req, res) => {
+  res.sendFile(path.join(__dirname, "../frontend/dist/index.html"));
+});
 
 app.use(errorLogger);
 
