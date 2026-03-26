@@ -4,9 +4,9 @@ const { usersRouter } = require("./routes/users");
 const { cardsRouter } = require("./routes/cards");
 const  AppError = require("./errors/AppError");
 const { login, createUser } = require("./controllers/users");
-const auth = require("../backend/middlewares/auth");
+const auth = require("./middlewares/auth");
 const { celebrate } = require('celebrate');
-const errorHandler = require('../backend/middlewares/errorHandler')
+const errorHandler = require('./middlewares/errorHandler')
 const { errors } = require('celebrate');
 const { validateUserBody } = require("./middlewares/validation");
 const { requestLogger, errorLogger } = require("./middlewares/logger");
@@ -28,7 +28,16 @@ app.use(express.json());
 
 app.use(requestLogger);
 
-app.use(cors());
+app.use(cors({
+  origin: [
+    'http://localhost:4173',
+    'http://localhost:3000',
+    'https://fotolog.crabdance.com'
+  ],
+  methods: ['GET', 'POST', 'PUT', 'DELETE', 'PATCH', 'OPTIONS'],
+  allowedHeaders: ['Content-Type', 'Authorization'],
+  credentials: true
+}));
 
 app.get('/crash-test', () => {
   setTimeout(() => {
@@ -43,8 +52,8 @@ app.post('/signup', celebrate({
 
 app.use(auth);
 
-app.use("/users", usersRouter);
-app.use("/cards", cardsRouter);
+app.use("/api/users", usersRouter);
+app.use("/api/cards", cardsRouter);
 
 app.use(errorLogger);
 

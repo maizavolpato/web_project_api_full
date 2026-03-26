@@ -89,8 +89,6 @@ async function createUser(req, res, next) {
     .catch (next)
   }
 
-
-
 async function updateProfile(req, res, next) {
   try {
     const userUpdate = await users

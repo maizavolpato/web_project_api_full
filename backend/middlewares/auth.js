@@ -10,7 +10,7 @@ const auth = (req, res, next) => {
     let payload;
 
     try {
-        payload = jwt.verify(token, 'sua-chave-secreta');
+        payload = jwt.verify(token, 'minha-chave-secreta');
     } catch (err) {
         return res.status(401).json({ message: 'Token inválido' })
     }
