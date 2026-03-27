@@ -59,7 +59,7 @@ app.use(auth);
 app.use("/api/users", usersRouter);
 app.use("/api/cards", cardsRouter);
 
-app.get("/*", (req, res) => {
+app.get("*", (req, res) => {
   res.sendFile(path.join(__dirname, "../frontend/dist/index.html"));
 });
 
