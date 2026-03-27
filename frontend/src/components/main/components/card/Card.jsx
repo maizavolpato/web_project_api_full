@@ -1,6 +1,7 @@
 import ImagePopup from "../imagePopup/ImagePopup.jsx";
 
 export default function Card(props) {
+  console.log("LINK DA IMAGEM:", props.card.link);
   const { name, link, isLiked, _id } = props.card;
   const { onImageClick, onDeleteCard, onCardLike } = props;
   const imageComponent = {
