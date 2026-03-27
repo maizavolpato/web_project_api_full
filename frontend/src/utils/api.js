@@ -12,7 +12,17 @@ class Api {
   }
 
   _makeRequest(url, options = {}) {
-    return fetch(url, options).then((res) => this._handleServerResponse(res));
+    // return fetch(url, options).then((res) => this._handleServerResponse(res));
+    const token = localStorage.getItem("jwt");
+
+    return fetch(url, {
+      ...options,
+      headers: {
+        ...options.headers,
+        authorization: `Bearer ${token}`,
+      },
+    }).then((res) => this._handleServerResponse(res));
+  
   }
 
   getInitialData() {
@@ -95,7 +105,6 @@ class Api {
 export const api = new Api({
   baseUrl: "https://fotolog.crabdance.com/api",
   headers: {
-    authorization: "3fa7de46-2d6c-46cc-9c7e-3a719231c7ef",
     "Content-Type": "application/json",
   },
 });
