@@ -1,17 +1,17 @@
 export default function Popup(props) {
   //children é o conteúdo de popup
-  const { onClose, title, children } = props;
+  const { onClose, title, children, isOpen } = props;
 
-  function handleOpenPopup(popup) {
-    setPopup(popup);
-  }
+  // function handleOpenPopup(popup) {
+  //   setPopup(popup);
+  // }
 
-  function handleClosePopup() {
-    setPopup(null);
-  }
+  // function handleClosePopup() {
+  //   setPopup(null);
+  // }
 
   return (
-    <section className="popup" id="popup-profile" onClick={onClose}>
+    <section className="popup popup_open" id="popup-profile" onClick={onClose}>
       <div className="popup__container" onClick={(e) => e.stopPropagation()}>
         <button
           aria-label="Close Popup"

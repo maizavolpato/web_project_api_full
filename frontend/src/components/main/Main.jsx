@@ -17,6 +17,7 @@ export default function Main({
 }) {
   const { currentUser } = useContext(CurrentUserContext);
 
+
   const newCardPopup = { title: "New card", children: <NewCard /> };
 
   const editProfilePopup = {
@@ -36,7 +37,7 @@ export default function Main({
       }
     }
     // Adiciona o event listener apenas se há um popup aberto
-    if (popup) {
+    if (popup.isOpen) {
       document.addEventListener("keydown", handleEscClose);
     }
     // remove o event listener quando o componente desmonta
@@ -51,7 +52,7 @@ export default function Main({
       <section className="profile">
         <div className="profile__image-container">
           <img
-            src={currentUser.avatar}
+            src={currentUser?.avatar}
             alt="Profile Image"
             className="profile__image"
           />
@@ -64,7 +65,7 @@ export default function Main({
         </div>
         <div className="profile__info">
           <div className="profile__name-button">
-            <h2 className="profile__name">{currentUser.name}</h2>
+            <h2 className="profile__name">{currentUser?.name}</h2>
             <button
               aria-label="Edit profile"
               className="profile__edit-button"
@@ -74,7 +75,7 @@ export default function Main({
               }}
             ></button>
           </div>
-          <h1 className="profile__job">{currentUser.about}</h1>
+          <h1 className="profile__job">{currentUser?.about}</h1>
         </div>
         <button
           aria-label="Add card"
@@ -96,8 +97,11 @@ export default function Main({
       </ul>
 
       {popup.isOpen && (
-        <Popup onClose={onClosePopup} title={popup.title}>
+        <Popup 
+          onClose={onClosePopup} 
+          title={popup.title}>
           {popup.children}
+          
         </Popup>
       )}
     </>

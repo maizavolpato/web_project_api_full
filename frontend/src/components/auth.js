@@ -1,5 +1,5 @@
 // Especifique a BASE_URL da API.
-export const BASE_URL = "https://fotolog.crabdance.com/api"
+export const BASE_URL = "https://se-register-api.en.tripleten-services.com/v1"
 //funcao verifica a resposta
 const checkResponse = (res) => {
     if (res.ok) {
@@ -14,6 +14,7 @@ const checkResponse = (res) => {
 // A função register aceita os dados necessários como argumentos
 // e envia uma solicitação POST ao endpoint especificado.
 export const register = (email, password) => {
+  console.log('Dados sendo enviados:', { email, password });
   return fetch(`${BASE_URL}/signup`, {
     method: "POST",
     headers: {

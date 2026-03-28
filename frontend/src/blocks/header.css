@@ -3,6 +3,23 @@
   margin: 45px auto 0;
   max-width: 880px;
   height: 74px;
+  display: flex;
+  justify-content: space-between;
+}
+
+.header__logo {
+  width: 173px;
+  height: 33px;
+}
+
+.header__link{
+font-family: Inter;
+font-weight: 400;
+font-size: 18px;
+line-height: 22px;
+justify-content: space-around;
+color: #ffff;
+text-decoration: none;
 }
 
 @media screen and (max-width: 544px) {

@@ -1,29 +1,108 @@
 import { useEffect, useState, useContext } from "react";
+import { useNavigate, Routes, Route } from "react-router-dom";
 import Header from "./header/Header";
 import Main from "./main/Main";
 import Footer from "./footer/Footer";
+import Register from "./main/components/register/Register";
+import Login from "./main/components/login/Login";
+import ProtectedRoute from "./main/components/protectedroute/ProtectedRoute"
 import ImagePopup from "./main/components/imagePopup/ImagePopup";
 import { api } from "../utils/api";
 import CurrentUserContext from "../contexts/CurrentUserContext";
-import { Routes, Route, HashRouter } from 'react-router-dom';
-import Login from "../components/main/components/login/Login";
-import Register from "../components/main/components/register/Register"
+import { register, login, checkToken, getUserInfo } from '../components/auth'
+import InfoTooltip from './main/components/infotooltip/InfoTooltip'
 
 function App() {
+  const navigate = useNavigate();
+
   const [currentUser, setCurrentUser] = useState({});
-  const [popup, setPopup] = useState({ isOpen: false, name: "" });
+  const [popup, setPopup] = useState({
+    isOpen: false,
+    title: "",
+    children: null,
+  });  
   const [cards, setCards] = useState([]);
+  const [isLoggedIn, setIsloggedIn] = useState(false);
+  const [infoTooltip, setInfoTooltip] = useState({
+    isOpen: false,
+    isSuccess: false,
+    message: ''
+  })
+  const [email, setEmail] = useState('');
 
   useEffect(() => {
-    api
-      .getUserInfo()
-      .then((userData) => {
-        setCurrentUser(userData);
+    const token = localStorage.getItem('jwt')
+    if(!token) {
+      return;
+    }
+    checkToken(token)
+    .then(() => {
+      return api.getUserInfo(token)
+      
+    })
+    .then((userData) => {
+      setCurrentUser(userData);
+      setEmail(userData.email);
+      setIsloggedIn(true);
+    })
+    .catch((err) => {
+      console.log(err);
+      localStorage.removeItem('jwt')
+    })
+  }, [])
+
+  const handleRegister = (email, password) => {
+    return register(email, password)
+    .then((data) => {
+      setInfoTooltip({
+        isOpen: true,
+        isSuccess: true,
+        message: 'Vitória! Você se registrou com sucesso.'
+         })
+      return data
+    
+    })
+    .catch((err) => {
+      setInfoTooltip({
+        isOpen: true,
+        isSuccess: false,
+        message: 'Ops, algo saiu errado! Por favor, tente novamente.'
       })
-      .catch((err) => {
-        console.log(err);
-      });
-  }, []);
+      console.log('Erro no registro:', err)
+      throw err
+    })
+  }
+
+  const handleLogin = (userData) => {
+    return login(userData.email, userData.password)
+    .then((token) => {
+      localStorage.setItem('jwt', token)
+      return checkToken(token)
+    })
+    .then(() => {
+      setIsloggedIn(true)
+      return getUserInfo(localStorage.getItem('jwt'))
+    })
+    .then((userData) => {
+      setCurrentUser(userData)
+      return api.getUserInfo()
+    }).then((userData) => {
+      setCurrentUser((prev)=> {
+        return { ...prev, ...userData }
+      })
+      setIsloggedIn(true)
+      navigate('/')
+    })
+    .catch((err) => {
+      setInfoTooltip({
+        isOpen: true,
+        isSuccess: false,
+        message: 'Ops, algo saiu errado! Por favor, tente novamente.'
+        })
+      console.log('Usuário não registrado')
+      throw err;
+    })
+  }
 
   const handleUpdateUser = (userData) => {
     (async () => {
@@ -131,13 +210,13 @@ function App() {
         handleAddPlaceSubmit,
       }}
     >
-      <HashRouter>
-        <div className="page">
-          <Header />
-          <Routes>
-            <Route path="/signup" element={<Register />} />
-            <Route path="/signin" element={<Login />} />
-            <Route path="/" element={
+      <div className="page">
+      <Header isLoggedIn={isLoggedIn}/>
+        <Routes>
+          <Route path="/signup" element={<Register handleRegister={handleRegister}/>} />
+          <Route path="/signin" element={<Login handleLogin={handleLogin}/>} />
+          <Route path="/" element={
+            <ProtectedRoute isLoggedIn={isLoggedIn}>
               <Main
                 onOpenPopup={handleOpenPopup}
                 onClosePopup={handleClosePopup}
@@ -147,11 +226,22 @@ function App() {
                 onDeleteCard={handleCardDelete}
                 onImageClick={handleImageClick}
               />
-            } />
-          </Routes>
-          <Footer />
-        </div>
-      </HashRouter>
+              <Footer />
+            </ProtectedRoute>
+          } /> 
+        </Routes>
+        <InfoTooltip
+        isOpen={infoTooltip.isOpen}
+        onClose={() =>
+          setInfoTooltip(prev => ({
+            ...prev,
+            isOpen: false
+          }))
+        }
+        isSuccess={infoTooltip.isSuccess}
+        message={infoTooltip.message}
+        />
+      </div>
     </CurrentUserContext.Provider>
   );
 }
